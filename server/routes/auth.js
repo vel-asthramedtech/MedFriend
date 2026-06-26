@@ -6,9 +6,9 @@ const User = require("../models/User");
 const { generateOtp, storeOtp, verifyOtp } = require("../utils/otpStore");
 const { sendOtpEmail } = require("../utils/mailer");
 const { protect } = require("../middleware/auth");
-const {
-  PricingV2TrunkingCountryInstanceOriginatingCallPrices,
-} = require("twilio/lib/rest/pricing/v2/country");
+// const {
+//   PricingV2TrunkingCountryInstanceOriginatingCallPrices,
+// } = require("twilio/lib/rest/pricing/v2/country");
 
 function generateToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET, {

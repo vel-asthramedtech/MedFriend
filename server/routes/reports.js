@@ -49,7 +49,7 @@ router.post("/upload", protect, upload.single("report"), async (req, res) => {
 
     // Upload to Cloudinary
     const cloudinaryResult = await uploadToCloudinary(req.file.buffer, {
-      folder: `medisetu/${req.user._id}`,
+      folder: `med/${req.user._id}`,
       resource_type: fileType === "pdf" ? "raw" : "image",
       public_id: `${Date.now()}-${Math.round(Math.random() * 1e9)}`,
     });
@@ -100,7 +100,7 @@ router.post("/upload", protect, upload.single("report"), async (req, res) => {
 
     res
       .status(201)
-      .json({ message: "Report uploaded. AI analysis started.", slug });
+      .json({ message: "Report uploaded. AI analysis started."+ slug });
   } catch (err) {
     console.error("Upload error:", err);
     res.status(500).json({ message: "Server error", error: err.message });
@@ -147,7 +147,7 @@ async function triggerAnalysis(
       await doc.save();
     }
   } catch (err) {
-    console.error("AI analysis error:", err.message);
+    console.error("AI analysis error:"+ err);
     await MedicalReport.updateOne(
       { userId },
       { $set: { [`data.${slug}.status`]: "failed" } },
