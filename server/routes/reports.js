@@ -98,9 +98,13 @@ router.post("/upload", protect, upload.single("report"), async (req, res) => {
       req.file.mimetype,
     ).catch(console.error);
 
-    res
-      .status(201)
-      .json({ message: "Report uploaded. AI analysis started."+ slug });
+    const report = doc.data.get(slug);
+
+    res.status(201).json({
+      success: true,
+      slug,
+      data: report,
+    });
   } catch (err) {
     console.error("Upload error:", err);
     res.status(500).json({ message: "Server error", error: err.message });
@@ -147,7 +151,7 @@ async function triggerAnalysis(
       await doc.save();
     }
   } catch (err) {
-    console.error("AI analysis error:"+ err);
+    console.error("AI analysis error:" + err);
     await MedicalReport.updateOne(
       { userId },
       { $set: { [`data.${slug}.status`]: "failed" } },

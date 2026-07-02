@@ -26,10 +26,6 @@ const PAGE_META = {
     title: "Medicine Reminders",
     subtitle: "Track and manage your daily medicines",
   },
-  schemes: {
-    title: "Government Schemes",
-    subtitle: "Health schemes available for Indian citizens",
-  },
   profile: {
     title: "My Profile",
     subtitle: "Manage your personal health details",

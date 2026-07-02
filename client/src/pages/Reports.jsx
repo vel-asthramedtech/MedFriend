@@ -13,15 +13,153 @@ function TestItem({ test }) {
   );
 }
 
+function Skeleton({ width = "100%", height = 14, radius = 6 }) {
+  return (
+    <div
+      className="skeleton"
+      style={{
+        width,
+        height,
+        borderRadius: radius,
+      }}
+    />
+  );
+}
+
 function ReportDetail({ report, onBack, onDelete }) {
   const d = report.extractedData;
-  if (report.status === 'processing') return (
+  if (report.status == "pending" || report.status == "processing") return (
+
     <div className="page-body fade-in">
-      <button className="btn btn-secondary btn-sm mb-16" onClick={onBack}>← Back</button>
-      <div className="card" style={{ textAlign: 'center', padding: 56 }}>
-        <div style={{ fontSize: 42, marginBottom: 16 }}>⏳</div>
-        <div style={{ fontSize: 18, fontWeight: 700 }}>Analysing your report</div>
-        <div style={{ fontSize: 13.5, color: 'var(--text3)', marginTop: 8 }}>AI is reading and extracting data. Usually takes 1–2 minutes. Refresh to check.</div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: 20,
+        }}
+      >
+        <button className="btn btn-secondary btn-sm" onClick={onBack}>
+          ← Back to reports
+        </button>
+
+        <button className="btn btn-danger btn-sm" disabled>
+          {Icons.trash} Delete
+        </button>
+      </div>
+
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+        {/* Left */}
+        <div
+          style={{
+            flex: 2,
+            minWidth: 280,
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          <div className="card skeleton-card">
+            <Skeleton width={140} height={18} />
+            <Skeleton width="60%" height={28} />
+
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </div>
+
+          <div className="card skeleton-card">
+            <Skeleton width={120} height={18} />
+
+            <Skeleton />
+            <Skeleton />
+            <Skeleton width="80%" />
+
+            <div
+              style={{
+                marginTop: 12,
+                padding: 12,
+                borderRadius: 8,
+                background: "var(--surface2)",
+              }}
+            >
+              <Skeleton width={100} height={12} />
+              <Skeleton style={{ marginTop: 8 }} />
+              <Skeleton width="70%" />
+            </div>
+          </div>
+
+          <div className="card skeleton-card">
+            <Skeleton width={120} height={18} />
+
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                style={{
+                  padding: 12,
+                  border: "1px solid var(--border)",
+                  borderRadius: 8,
+                }}
+              >
+                <Skeleton width="45%" />
+                <Skeleton width="30%" />
+                <Skeleton width="60%" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right */}
+        <div
+          style={{
+            flex: 1,
+            minWidth: 240,
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          <div className="card skeleton-card">
+            <Skeleton width={160} height={18} />
+
+            {[1, 2, 3].map((i) => (
+              <div key={i}>
+                <Skeleton width="70%" />
+                <Skeleton width="40%" />
+              </div>
+            ))}
+          </div>
+
+          <div className="card skeleton-card">
+            <Skeleton width={100} height={18} />
+
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+
+            <button
+              className="btn btn-secondary btn-sm"
+              disabled
+              style={{ marginTop: 12 }}
+            >
+              Preparing file...
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: 24,
+          color: "var(--text3)",
+          fontSize: 13,
+        }}
+      >
+        <Spinner />
+        <div style={{ marginTop: 10 }}>
+          AI is analysing your medical report...
+        </div>
       </div>
     </div>
   );
@@ -105,15 +243,15 @@ function ReportDetail({ report, onBack, onDelete }) {
 }
 
 export default function Reports() {
-  const [reports, setReports]   = useState({});
-  const [loading, setLoading]   = useState(true);
+  const [reports, setReports] = useState({});
+  const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null);
   const [showUpload, setShowUpload] = useState(false);
-  const [uploading, setUploading]   = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [uploadName, setUploadName] = useState('');
-  const [file, setFile]         = useState(null);
+  const [file, setFile] = useState(null);
   const [dragging, setDragging] = useState(false);
-  const [error, setError]       = useState('');
+  const [error, setError] = useState('');
   const fileRef = useRef();
 
   const load = () => {
@@ -122,6 +260,23 @@ export default function Reports() {
   };
   useEffect(load, []);
 
+  const pollUntilCompleted = (slug) => {
+    const interval = setInterval(async () => {
+      const res = await reportsAPI.getAll();
+
+      const report = res.data.data[slug];
+
+      if (!report) return;
+
+      if (report.status !== "pending" && report.status !== "processing") {
+        clearInterval(interval);
+
+        setReports(res.data.data);
+        setSelected([slug, report]);
+      }
+    }, 2000);
+  };
+
   const handleUpload = async () => {
     if (!file || !uploadName) return setError('Report name and file are required');
     setUploading(true); setError('');
@@ -129,9 +284,16 @@ export default function Reports() {
       const fd = new FormData();
       fd.append('report', file);
       fd.append('reportName', uploadName);
-      await reportsAPI.upload(fd);
-      setShowUpload(false); setFile(null); setUploadName('');
-      load();
+      // await reportsAPI.upload(fd);
+      // setShowUpload(false); setFile(null); setUploadName('');
+      // load();
+      const res = await reportsAPI.upload(fd);
+
+      const { slug, data } = res.data;
+
+      setSelected([slug, data]);
+
+      pollUntilCompleted(slug);
     } catch (err) {
       setError(err.response?.data?.message || 'Upload failed');
     } finally { setUploading(false); }

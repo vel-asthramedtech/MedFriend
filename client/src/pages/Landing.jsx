@@ -34,14 +34,6 @@ const FEATURES = [
     tagColor: "#1a56db",
   },
   {
-    icon: "🏛️",
-    title: "Government Schemes",
-    desc: "Discover Ayushman Bharat, PM-JAY, and state schemes you qualify for. Filter by state, category, and eligibility.",
-    tag: "Central + State",
-    color: "#ccfbf1",
-    tagColor: "#0d9488",
-  },
-  {
     icon: "☁️",
     title: "Secure Health Vault",
     desc: "All your reports stored securely in the cloud. Access anytime, share with your doctor, never lose a report again.",
@@ -97,14 +89,13 @@ const TESTIMONIALS = [
 
 const MARQUEE_ITEMS = [
   "AI Report Analysis",
-  "Hindi & English",
+  "Tamil & English",
   "Medicine Reminders",
-  "Govt Schemes",
   "OCR Technology",
   "Scan & Understand",
   "Health Score",
   "Secure Cloud",
-  "MediBot AI",
+  "MedBot AI",
 ];
 
 export default function Landing({ onLogin, onRegister }) {
