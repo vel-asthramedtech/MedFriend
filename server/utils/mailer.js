@@ -10,10 +10,10 @@ const transporter = nodemailer.createTransport({
 
 async function sendOtpEmail(to, otp, name = "") {
   await transporter.sendMail({
-    from: `"MediSetu" <${process.env.GMAIL_USER}>`,
+    from: `"MedFriend" <${process.env.GMAIL_USER}>`,
     to,
-    subject: `MediSetu Verification OTP`,
-    text: `${otp} is your MediSetu verification code
+    subject: `MedFriend Verification OTP`,
+    text: `${otp} is your MedFriend verification code
     Do not share this OTP with another persons`,
   });
 }
@@ -27,9 +27,9 @@ async function sendReminderEmail(to, name, medicines) {
     .join("");
 
   await transporter.sendMail({
-    from: `"MediSetu" <${process.env.GMAIL_USER}>`,
+    from: `"MedFriend" <${process.env.GMAIL_USER}>`,
     to,
-    subject: `MediSetu Reminder`,
+    subject: `MedFriend Reminder`,
     text: `Hi ${name}, time to take your medicine: ${medicines.map((m) => `${m.medicineName} ${m.dosage} at ${m.time}`).join(", ")}`,
     html: `
       <p>Hi <strong>${name}</strong>,</p>

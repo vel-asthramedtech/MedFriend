@@ -17,7 +17,7 @@ function getGrok() {
   return _grok;
 }
 
-const SYSTEM_PROMPT = `You are MediBot, a medical AI assistant for MediSetu, an Indian health app.
+const SYSTEM_PROMPT = `You are MediBot, a medical AI assistant for MedFriend, an Indian health app.
 
 LANGUAGE DETECTION — THIS IS YOUR MOST IMPORTANT RULE:
 - Look at the user's CURRENT message carefully

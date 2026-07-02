@@ -9,8 +9,8 @@ import { Spinner, Icons } from "../components/UI";
 function TnCModal({ onClose, onAccept }) {
   const sections = [
     {
-      title: "1. About MediSetu",
-      body: "MediSetu is an AI-powered unified health surveillance ecosystem that enables users to digitize medical records, receive AI-driven health analysis, discover government health schemes, and set medicine reminders.",
+      title: "1. About MedFriend",
+      body: "MedFriend is an AI-powered unified health surveillance ecosystem that enables users to digitize medical records, receive AI-driven health analysis, discover government health schemes, and set medicine reminders.",
     },
     {
       title: "2. Eligibility",
@@ -22,7 +22,7 @@ function TnCModal({ onClose, onAccept }) {
     },
     {
       title: "4. Data Privacy & Anonymized Data Usage",
-      body: "Your personal health data is stored in encrypted cloud storage. By using MediSetu, you consent to the anonymization and aggregation of your health data for population-level insights, which may be shared with government agencies, R&D institutions, and pharmaceutical companies. No personally identifiable information (PII) will be shared.",
+      body: "Your personal health data is stored in encrypted cloud storage. By using MedFriend, you consent to the anonymization and aggregation of your health data for population-level insights, which may be shared with government agencies, R&D institutions, and pharmaceutical companies. No personally identifiable information (PII) will be shared.",
     },
     {
       title: "5. Insurance & Government Schemes",
@@ -34,7 +34,7 @@ function TnCModal({ onClose, onAccept }) {
     },
     {
       title: "7. Limitation of Liability",
-      body: "MediSetu Technologies Pvt. Ltd. shall not be liable for medical decisions made based on AI-generated analysis, data loss due to force majeure, or any indirect/consequential damages arising from platform use.",
+      body: "MedFriend Technologies Pvt. Ltd. shall not be liable for medical decisions made based on AI-generated analysis, data loss due to force majeure, or any indirect/consequential damages arising from platform use.",
     },
     {
       title: "8. Governing Law",
@@ -66,7 +66,7 @@ function TnCModal({ onClose, onAccept }) {
         {/* Scrollable body */}
         <div style={styles.modalBody}>
           <div style={styles.notice}>
-            📋 Please read these terms carefully before creating your MediSetu
+            📋 Please read these terms carefully before creating your MedFriend
             account.
           </div>
 
@@ -459,7 +459,7 @@ export function Login({ goRegister }) {
           <div
             style={{ fontSize: 13, color: "var(--text3)", marginBottom: 24 }}
           >
-            Sign in to your MediSetu account
+            Sign in to your MedFriend account
           </div>
 
           <div className="form-group">
@@ -858,7 +858,7 @@ export function Register({ goLogin }) {
                     userSelect: "none",
                   }}
                 >
-                  I have read and agree to MediSetu's{" "}
+                  I have read and agree to MedFriend's{" "}
                   <span
                     style={{
                       color: "var(--accent)",

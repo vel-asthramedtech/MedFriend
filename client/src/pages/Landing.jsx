@@ -47,7 +47,7 @@ const STEPS = [
   {
     icon: "📝",
     title: "Register Free",
-    desc: "Create your account in 2 minutes. Get your unique MediSetu health ID instantly.",
+    desc: "Create your account in 2 minutes. Get your unique MedFriend health ID instantly.",
   },
   {
     icon: "📤",
@@ -80,7 +80,7 @@ const TESTIMONIALS = [
     initials: "PD",
   },
   {
-    text: '"Mujhe pata hi nahi tha ki Ayushman Bharat ke liye eligible hun. MediSetu ke schemes section se pata chala. Ab free mein treatment mil raha hai!"',
+    text: '"Mujhe pata hi nahi tha ki Ayushman Bharat ke liye eligible hun. MedFriend ke schemes section se pata chala. Ab free mein treatment mil raha hai!"',
     name: "Ramesh Meena",
     loc: "Jaipur, Rajasthan",
     initials: "RM",
@@ -1028,7 +1028,7 @@ export default function Landing({ onLogin, onRegister }) {
           <span style={{ color: "#60a5fa", fontStyle: "normal" }}>Setu</span>
         </div>
         <div style={{ fontSize: 13, color: "rgba(255,255,255,.3)" }}>
-          © 2026 MediSetu. Made with ❤️ for India.
+          © 2026 MedFriend. Made with ❤️ for India.
         </div>
         <div style={{ display: "flex", gap: 24 }}>
           {["Privacy", "Terms", "Contact"].map((link) => (
