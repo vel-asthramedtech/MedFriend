@@ -41,7 +41,7 @@ export default function Navbar({ page, setPage }) {
         <div className="logo">
           <span className="logo-icon">{Icons.logo}</span>
           <span className="logo-text">
-            Medi<span>Setu</span>
+            Med<span>Friend</span>
           </span>
         </div>
       </div>

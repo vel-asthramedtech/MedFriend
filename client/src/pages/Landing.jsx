@@ -6,23 +6,23 @@ const FEATURES = [
     title: "AI Report Analysis",
     desc: "Upload any medical report — blood test, X-ray, ECG. AI extracts every value, flags abnormals, and explains in plain language.",
     tag: "Powered by Groq AI",
-    color: "#dbeafe",
-    tagColor: "#1a56db",
+    color: "#e6f8f7",
+    tagColor: "#028191",
   },
   {
     icon: "💬",
-    title: "MediBot — Your AI Doctor",
-    desc: "Ask anything about your health in Hindi or English. MediBot understands your reports and gives personalised answers 24/7.",
-    tag: "Hindi + English",
-    color: "#ccfbf1",
-    tagColor: "#0d9488",
+    title: "MedBot — Your AI Doctor",
+    desc: "Ask anything about your health in Tamil or English. MedBot understands your reports and gives personalised answers 24/7.",
+    tag: "Tamil + English",
+    color: "#e9fcf7",
+    tagColor: "#01C29A",
   },
   {
     icon: "💊",
     title: "Medicine Reminders",
     desc: "Set reminders for any medicine. Get email alerts at the right time. Track daily, alternate, or weekly schedules effortlessly.",
     tag: "Email alerts",
-    color: "#fef3c7",
+    color: "#fff8eb",
     tagColor: "#d97706",
   },
   {
@@ -30,15 +30,15 @@ const FEATURES = [
     title: "Scan & Understand",
     desc: "Point your camera at a medicine strip, insurance document, or hospital bill. Get instant AI explanation in seconds.",
     tag: "Any document",
-    color: "#dbeafe",
-    tagColor: "#1a56db",
+    color: "#e6f8f7",
+    tagColor: "#028191",
   },
   {
     icon: "☁️",
     title: "Secure Health Vault",
     desc: "All your reports stored securely in the cloud. Access anytime, share with your doctor, never lose a report again.",
     tag: "Encrypted storage",
-    color: "#fef3c7",
+    color: "#fff8eb",
     tagColor: "#d97706",
   },
 ];
@@ -62,28 +62,7 @@ const STEPS = [
   {
     icon: "💬",
     title: "Ask Questions",
-    desc: "Chat with MediBot about your results in Hindi or English. Get answers instantly.",
-  },
-];
-
-const TESTIMONIALS = [
-  {
-    text: '"Pehle kabhi samajh nahi aata tha ki report mein kya likha hai. Ab MediBot sab Hindi mein explain kar deta hai. Meri maa ke liye bahut helpful hai."',
-    name: "Suresh Yadav",
-    loc: "Lucknow, Uttar Pradesh",
-    initials: "SY",
-  },
-  {
-    text: '"The medicine reminder emails are a lifesaver. My father has 4 medicines daily and he never misses one now. The Scan feature explained his insurance document perfectly."',
-    name: "Priya Desai",
-    loc: "Pune, Maharashtra",
-    initials: "PD",
-  },
-  {
-    text: '"Mujhe pata hi nahi tha ki Ayushman Bharat ke liye eligible hun. MedFriend se pata chala. Ab free mein treatment mil raha hai!"',
-    name: "Ramesh Meena",
-    loc: "Jaipur, Rajasthan",
-    initials: "RM",
+    desc: "Chat with MedBot about your results in Tamil or English. Get answers instantly.",
   },
 ];
 
@@ -130,38 +109,38 @@ export default function Landing({ onLogin, onRegister }) {
   return (
     <div
       style={{
-        fontFamily: "'DM Sans', sans-serif",
-        background: "#f8f6f0",
-        color: "#0a0f1e",
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        background: "#f4fbfa",
+        color: "#12343b",
         overflowX: "hidden",
       }}
     >
       {/* Google Fonts */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@500&display=swap');
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes float0 { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
         @keyframes float1 { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-14px); } }
         @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(0.8); } }
         @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-        .lp-nav-link { font-size:14px; color:#6b7280; text-decoration:none; font-weight:500; transition:color .2s; }
-        .lp-nav-link:hover { color:#0a0f1e; }
+        .lp-nav-link { font-size:14px; color:#426268; text-decoration:none; font-weight:500; transition:color .2s; }
+        .lp-nav-link:hover { color:#12343b; }
         .lp-feature-card { background:white; padding:32px; transition:background .2s, transform .2s; cursor:default; position:relative; overflow:hidden; }
-        .lp-feature-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,#1a56db,#0d9488); transform:scaleX(0); transition:transform .3s; transform-origin:left; }
+        .lp-feature-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,#028191,#01C29A); transform:scaleX(0); transition:transform .3s; transform-origin:left; }
         .lp-feature-card:hover::before { transform:scaleX(1); }
-        .lp-feature-card:hover { background:#fefefe; transform:translateY(-2px); }
-        .lp-step:hover .lp-step-icon { background:#1a56db !important; transform:scale(1.08); }
-        .lp-tcard { background:white; border:1px solid #eeeae0; border-radius:16px; padding:28px; transition:all .3s; }
-        .lp-tcard:hover { box-shadow:0 16px 48px rgba(0,0,0,.08); transform:translateY(-4px); }
-        .lp-btn-primary { background:#1a56db; color:white; border:2px solid #1a56db; padding:13px 28px; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:all .2s; display:inline-flex; align-items:center; gap:8px; }
-        .lp-btn-primary:hover { background:#1648c7; transform:translateY(-2px); box-shadow:0 12px 32px rgba(26,86,219,.3); }
-        .lp-btn-secondary { background:transparent; color:#0a0f1e; border:2px solid #2d3561; padding:13px 28px; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:all .2s; }
-        .lp-btn-secondary:hover { background:#0a0f1e; color:white; transform:translateY(-2px); }
-        .lp-cta-input { flex:1; padding:13px 18px; border:1px solid rgba(255,255,255,.15); border-radius:10px; background:rgba(255,255,255,.08); color:white; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border .2s; }
+        .lp-feature-card:hover { background:#f8fdfc; transform:translateY(-2px); }
+        .lp-step:hover .lp-step-icon { background:#028191 !important; transform:scale(1.08); }
+        .lp-tcard { background:white; border:1px solid #d9ece8; border-radius:16px; padding:28px; transition:all .3s; }
+        .lp-tcard:hover { box-shadow:0 16px 48px rgba(2,129,145,.12); transform:translateY(-4px); }
+        .lp-btn-primary { background:linear-gradient(135deg,#028191,#01C29A); color:white; border:2px solid transparent; padding:13px 28px; border-radius:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:all .2s; display:inline-flex; align-items:center; gap:8px; }
+        .lp-btn-primary:hover { background:linear-gradient(135deg,#016b79,#00ae89); transform:translateY(-2px); box-shadow:0 12px 32px rgba(2,129,145,.3); }
+        .lp-btn-secondary { background:transparent; color:#12343b; border:2px solid #12343b; padding:13px 28px; border-radius:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:all .2s; }
+        .lp-btn-secondary:hover { background:#12343b; color:white; transform:translateY(-2px); }
+        .lp-cta-input { flex:1; padding:13px 18px; border:1px solid rgba(255,255,255,.15); border-radius:10px; background:rgba(255,255,255,.08); color:white; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; outline:none; transition:border .2s; }
         .lp-cta-input::placeholder { color:rgba(255,255,255,.4); }
         .lp-cta-input:focus { border-color:rgba(255,255,255,.4); }
-        .lp-cta-btn { padding:13px 24px; background:#1a56db; color:white; border:none; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; white-space:nowrap; }
-        .lp-cta-btn:hover { background:#1648c7; }
+        .lp-cta-btn { padding:13px 24px; background:#028191; color:white; border:none; border-radius:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; white-space:nowrap; }
+        .lp-cta-btn:hover { background:#016b79; }
       `}</style>
 
       {/* ── NAV ── */}
@@ -176,9 +155,9 @@ export default function Landing({ onLogin, onRegister }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "rgba(248,246,240,.9)",
+          background: "rgba(244,251,250,.9)",
           backdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(0,0,0,.06)",
+          borderBottom: "1px solid rgba(2,129,145,.08)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -186,7 +165,7 @@ export default function Landing({ onLogin, onRegister }) {
             style={{
               width: 36,
               height: 36,
-              background: "#1a56db",
+              background: "#028191",
               borderRadius: 10,
               display: "flex",
               alignItems: "center",
@@ -210,13 +189,14 @@ export default function Landing({ onLogin, onRegister }) {
           </div>
           <span
             style={{
-              fontFamily: "'Instrument Serif',serif",
+              fontFamily: "'Plus Jakarta Sans',sans-serif",
               fontSize: 22,
-              fontStyle: "italic",
+              fontWeight: 700,
+              letterSpacing: "-.5px",
             }}
           >
-            Medi
-            <span style={{ color: "#1a56db", fontStyle: "normal" }}>Setu</span>
+            Med
+            <span style={{ color: "#028191" }}>Friend</span>
           </span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
@@ -235,12 +215,12 @@ export default function Landing({ onLogin, onRegister }) {
             onClick={onLogin}
             style={{
               padding: "8px 20px",
-              border: "1.5px solid #2d3561",
+              border: "1.5px solid #12343b",
               borderRadius: 8,
-              fontFamily: "'DM Sans',sans-serif",
+              fontFamily: "'Plus Jakarta Sans',sans-serif",
               fontSize: 13.5,
               fontWeight: 600,
-              color: "#2d3561",
+              color: "#12343b",
               background: "transparent",
               cursor: "pointer",
               transition: "all .2s",
@@ -252,13 +232,13 @@ export default function Landing({ onLogin, onRegister }) {
             onClick={onRegister}
             style={{
               padding: "8px 20px",
-              border: "1.5px solid #1a56db",
+              border: "1.5px solid #028191",
               borderRadius: 8,
-              fontFamily: "'DM Sans',sans-serif",
+              fontFamily: "'Plus Jakarta Sans',sans-serif",
               fontSize: 13.5,
               fontWeight: 600,
               color: "white",
-              background: "#1a56db",
+              background: "linear-gradient(135deg,#028191,#01C29A)",
               cursor: "pointer",
               transition: "all .2s",
             }}
@@ -292,7 +272,7 @@ export default function Landing({ onLogin, onRegister }) {
             height: 700,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle,rgba(26,86,219,.07) 0%,transparent 70%)",
+              "radial-gradient(circle,rgba(2,129,145,.08) 0%,transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -305,7 +285,7 @@ export default function Landing({ onLogin, onRegister }) {
             height: 500,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle,rgba(13,148,136,.06) 0%,transparent 70%)",
+              "radial-gradient(circle,rgba(1,194,154,.08) 0%,transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -314,7 +294,7 @@ export default function Landing({ onLogin, onRegister }) {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "radial-gradient(circle,rgba(0,0,0,.05) 1px,transparent 1px)",
+              "radial-gradient(circle,rgba(2,129,145,.06) 1px,transparent 1px)",
             backgroundSize: "32px 32px",
             pointerEvents: "none",
           }}
@@ -328,12 +308,12 @@ export default function Landing({ onLogin, onRegister }) {
               alignItems: "center",
               gap: 8,
               padding: "6px 14px",
-              background: "#dbeafe",
-              border: "1px solid rgba(26,86,219,.2)",
+              background: "#e6f8f7",
+              border: "1px solid #b9ebe5",
               borderRadius: 20,
               fontSize: 12.5,
               fontWeight: 600,
-              color: "#1a56db",
+              color: "#028191",
               marginBottom: 28,
               animation: "fadeUp .8s ease forwards",
             }}
@@ -343,7 +323,7 @@ export default function Landing({ onLogin, onRegister }) {
                 width: 7,
                 height: 7,
                 borderRadius: "50%",
-                background: "#1a56db",
+                background: "#028191",
                 display: "inline-block",
                 animation: "pulse 2s infinite",
               }}
@@ -353,9 +333,11 @@ export default function Landing({ onLogin, onRegister }) {
 
           <div
             style={{
-              fontFamily: "'Instrument Serif',serif",
-              fontSize: "clamp(52px,7vw,92px)",
+              fontFamily: "'Plus Jakarta Sans',sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(48px,6.5vw,84px)",
               lineHeight: 1.05,
+              letterSpacing: "-2px",
               animation: "fadeUp .8s .1s ease both",
             }}
           >
@@ -363,11 +345,13 @@ export default function Landing({ onLogin, onRegister }) {
           </div>
           <div
             style={{
-              fontFamily: "'Instrument Serif',serif",
-              fontSize: "clamp(52px,7vw,92px)",
+              fontFamily: "'Plus Jakarta Sans',sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(48px,6.5vw,84px)",
               lineHeight: 1.05,
+              letterSpacing: "-2px",
               fontStyle: "italic",
-              color: "#1a56db",
+              color: "#028191",
               marginBottom: 24,
               animation: "fadeUp .8s .15s ease both",
             }}
@@ -378,7 +362,7 @@ export default function Landing({ onLogin, onRegister }) {
           <p
             style={{
               fontSize: 18,
-              color: "#6b7280",
+              color: "#426268",
               lineHeight: 1.7,
               maxWidth: 540,
               margin: "0 auto 40px",
@@ -386,7 +370,7 @@ export default function Landing({ onLogin, onRegister }) {
             }}
           >
             Upload reports. Chat in{" "}
-            <strong style={{ color: "#0a0f1e" }}>Hindi or English</strong>. Get
+            <strong style={{ color: "#12343b" }}>Tamil or English</strong>. Get
             medicine reminders. All in one place — for every Indian.
           </p>
 
@@ -444,7 +428,7 @@ export default function Landing({ onLogin, onRegister }) {
 
       {/* ── MARQUEE ── */}
       <div
-        style={{ padding: "22px 0", background: "#0a0f1e", overflow: "hidden" }}
+        style={{ padding: "22px 0", background: "#062b2f", overflow: "hidden" }}
       >
         <div
           style={{
@@ -486,7 +470,7 @@ export default function Landing({ onLogin, onRegister }) {
               fontWeight: 700,
               letterSpacing: ".12em",
               textTransform: "uppercase",
-              color: "#1a56db",
+              color: "#028191",
               marginBottom: 14,
             }}
           >
@@ -494,19 +478,21 @@ export default function Landing({ onLogin, onRegister }) {
           </div>
           <div
             style={{
-              fontFamily: "'Instrument Serif',serif",
-              fontSize: "clamp(36px,4vw,56px)",
+              fontFamily: "'Plus Jakarta Sans',sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(34px,3.8vw,52px)",
               lineHeight: 1.1,
+              letterSpacing: "-1px",
               marginBottom: 16,
             }}
           >
             Healthcare in your pocket,{" "}
-            <em style={{ color: "#1a56db" }}>your language.</em>
+            <em style={{ color: "#028191" }}>your language.</em>
           </div>
           <p
             style={{
               fontSize: 17,
-              color: "#6b7280",
+              color: "#426268",
               lineHeight: 1.7,
               maxWidth: 500,
             }}
@@ -524,8 +510,8 @@ export default function Landing({ onLogin, onRegister }) {
             gridTemplateColumns: "repeat(3,1fr)",
             gap: 2,
             marginTop: 64,
-            background: "#eeeae0",
-            border: "2px solid #eeeae0",
+            background: "#d9ece8",
+            border: "2px solid #d9ece8",
             borderRadius: 20,
             overflow: "hidden",
           }}
@@ -550,7 +536,7 @@ export default function Landing({ onLogin, onRegister }) {
               <div style={{ fontSize: 17, fontWeight: 700, marginBottom: 10 }}>
                 {f.title}
               </div>
-              <div style={{ fontSize: 14, color: "#6b7280", lineHeight: 1.7 }}>
+              <div style={{ fontSize: 14, color: "#426268", lineHeight: 1.7 }}>
                 {f.desc}
               </div>
               <span
@@ -577,7 +563,7 @@ export default function Landing({ onLogin, onRegister }) {
         id="lp-how"
         style={{
           padding: "120px 48px",
-          background: "#0a0f1e",
+          background: "#062b2f",
           position: "relative",
           overflow: "hidden",
         }}
@@ -615,14 +601,16 @@ export default function Landing({ onLogin, onRegister }) {
             </div>
             <div
               style={{
-                fontFamily: "'Instrument Serif',serif",
-                fontSize: "clamp(36px,4vw,56px)",
+                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                fontWeight: 600,
+                fontSize: "clamp(34px,3.8vw,52px)",
                 color: "white",
                 lineHeight: 1.1,
+                letterSpacing: "-1px",
               }}
             >
               From report to{" "}
-              <em style={{ color: "#60a5fa" }}>understanding in minutes.</em>
+              <em style={{ color: "#4fd6c7" }}>understanding in minutes.</em>
             </div>
           </div>
 
@@ -719,7 +707,7 @@ export default function Landing({ onLogin, onRegister }) {
                 fontWeight: 700,
                 letterSpacing: ".12em",
                 textTransform: "uppercase",
-                color: "#1a56db",
+                color: "#028191",
                 marginBottom: 14,
               }}
             >
@@ -727,34 +715,36 @@ export default function Landing({ onLogin, onRegister }) {
             </div>
             <div
               style={{
-                fontFamily: "'Instrument Serif',serif",
-                fontSize: "clamp(36px,4vw,56px)",
+                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                fontWeight: 600,
+                fontSize: "clamp(34px,3.8vw,52px)",
                 lineHeight: 1.1,
+                letterSpacing: "-1px",
                 marginBottom: 16,
               }}
             >
-              Ask in <em style={{ color: "#1a56db" }}>Hindi.</em>
+              Ask in <em style={{ color: "#028191" }}>Tamil.</em>
               <br />
-              Understand in Hindi.
+              Understand in Tamil.
             </div>
             <p
               style={{
                 fontSize: 16,
-                color: "#6b7280",
+                color: "#426268",
                 lineHeight: 1.7,
                 marginBottom: 28,
               }}
             >
-              Most health apps only speak English. MediBot speaks your language
+              Most health apps only speak English. MedBot speaks your language
               — because health information should never have a language barrier.
             </p>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               {[
-                ["हिंदी", "#dbeafe", "#1a56db"],
-                ["English", "#ccfbf1", "#0d9488"],
-                ["தமிழ்", "#fef3c7", "#d97706"],
-                ["বাংলা", "#fee2e2", "#dc2626"],
-                ["తెలుగు", "#f3e8ff", "#7c3aed"],
+                ["हिंदी", "#e6f8f7", "#028191"],
+                ["English", "#e9fcf7", "#01C29A"],
+                ["தமிழ்", "#fff8eb", "#d97706"],
+                ["বাংলা", "#fff2f8", "#db2777"],
+                ["తెలుగు", "#f5f3ff", "#7c3aed"],
               ].map(([lang, bg, color]) => (
                 <span
                   key={lang}
@@ -777,10 +767,10 @@ export default function Landing({ onLogin, onRegister }) {
             <div
               style={{
                 background: "white",
-                border: "1px solid #eeeae0",
+                border: "1px solid #d9ece8",
                 borderRadius: 20,
                 padding: 24,
-                boxShadow: "0 20px 60px rgba(0,0,0,.07)",
+                boxShadow: "0 20px 60px rgba(2,129,145,.1)",
                 marginBottom: 14,
                 animation: "float0 4s ease-in-out infinite",
               }}
@@ -798,8 +788,8 @@ export default function Landing({ onLogin, onRegister }) {
                     width: 36,
                     height: 36,
                     borderRadius: "50%",
-                    background: "#dbeafe",
-                    color: "#1a56db",
+                    background: "#e6f8f7",
+                    color: "#028191",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -813,13 +803,13 @@ export default function Landing({ onLogin, onRegister }) {
                   <div style={{ fontSize: 13, fontWeight: 600 }}>
                     Rajesh Kumar
                   </div>
-                  <div style={{ fontSize: 11, color: "#6b7280" }}>
-                    Patient · Noida
+                  <div style={{ fontSize: 11, color: "#7a9398" }}>
+                    Patient · Chennai
                   </div>
                 </div>
               </div>
-              <div style={{ fontSize: 15, color: "#2d3561", lineHeight: 1.6 }}>
-                Mera blood sugar 198 hai — kya yeh serious hai?
+              <div style={{ fontSize: 15, color: "#12343b", lineHeight: 1.6 }}>
+                Enaku blood sugar 198 irukku — idhu serious ah?
               </div>
               <span
                 style={{
@@ -829,21 +819,21 @@ export default function Landing({ onLogin, onRegister }) {
                   fontWeight: 700,
                   padding: "2px 8px",
                   borderRadius: 10,
-                  background: "#f8f6f0",
-                  color: "#6b7280",
+                  background: "#f4fbfa",
+                  color: "#7a9398",
                   letterSpacing: ".04em",
                 }}
               >
-                Hinglish
+                Tanglish
               </span>
             </div>
             <div
               style={{
                 background: "white",
-                border: "1px solid #eeeae0",
+                border: "1px solid #d9ece8",
                 borderRadius: 20,
                 padding: 24,
-                boxShadow: "0 20px 60px rgba(0,0,0,.07)",
+                boxShadow: "0 20px 60px rgba(2,129,145,.1)",
                 marginLeft: 24,
                 animation: "float1 4s ease-in-out infinite",
                 animationDelay: ".5s",
@@ -862,7 +852,7 @@ export default function Landing({ onLogin, onRegister }) {
                     width: 36,
                     height: 36,
                     borderRadius: "50%",
-                    background: "#1a56db",
+                    background: "#028191",
                     color: "white",
                     display: "flex",
                     alignItems: "center",
@@ -874,16 +864,14 @@ export default function Landing({ onLogin, onRegister }) {
                   MB
                 </div>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 600 }}>MediBot</div>
-                  <div style={{ fontSize: 11, color: "#6b7280" }}>
+                  <div style={{ fontSize: 13, fontWeight: 600 }}>MedBot</div>
+                  <div style={{ fontSize: 11, color: "#7a9398" }}>
                     AI Health Assistant
                   </div>
                 </div>
               </div>
-              <div style={{ fontSize: 14, color: "#2d3561", lineHeight: 1.6 }}>
-                Haan Rajesh ji, 198 mg/dL fasting sugar thoda zyada hai (normal:
-                70–100). Yeh pre-diabetes ka sign ho sakta hai. Aapki Metformin
-                bilkul sahi hai. Meetha kam karein, roz 30 min walk karein. 🙏
+              <div style={{ fontSize: 14, color: "#12343b", lineHeight: 1.6 }}>
+                Aama Rajesh, 198 mg/dL fasting sugar konjam adhigama irukku (normal: 70–100). Idhu pre-diabetes sign-a irukkalam. Ungal Metformin sariya irukku. Sweet konjam kammi pannunga, daily 30 nimisham walk pannunga. 🙏
               </div>
               <span
                 style={{
@@ -893,27 +881,23 @@ export default function Landing({ onLogin, onRegister }) {
                   fontWeight: 700,
                   padding: "2px 8px",
                   borderRadius: 10,
-                  background: "#f8f6f0",
-                  color: "#6b7280",
+                  background: "#f4fbfa",
+                  color: "#7a9398",
                   letterSpacing: ".04em",
                 }}
               >
-                Hindi + English
+                Tamil + English
               </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── STATS ── */}
-
-      {/* ── TESTIMONIALS ── */}
-
       {/* ── CTA ── */}
       <section
         style={{
           padding: "120px 48px",
-          background: "#0a0f1e",
+          background: "#062b2f",
           position: "relative",
           overflow: "hidden",
         }}
@@ -927,7 +911,7 @@ export default function Landing({ onLogin, onRegister }) {
             height: 600,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle,rgba(26,86,219,.15) 0%,transparent 70%)",
+              "radial-gradient(circle,rgba(2,129,145,.22) 0%,transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -940,7 +924,7 @@ export default function Landing({ onLogin, onRegister }) {
             height: 500,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle,rgba(13,148,136,.12) 0%,transparent 70%)",
+              "radial-gradient(circle,rgba(1,194,154,.18) 0%,transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -957,16 +941,18 @@ export default function Landing({ onLogin, onRegister }) {
         >
           <div
             style={{
-              fontFamily: "'Instrument Serif',serif",
-              fontSize: "clamp(40px,5vw,68px)",
+              fontFamily: "'Plus Jakarta Sans',sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(38px,4.8vw,64px)",
               color: "white",
               lineHeight: 1.1,
+              letterSpacing: "-1.5px",
               marginBottom: 18,
             }}
           >
             Start understanding
             <br />
-            your health <em style={{ color: "#60a5fa" }}>today.</em>
+            your health <em style={{ color: "#4fd6c7" }}>today.</em>
           </div>
           <p
             style={{
@@ -1005,7 +991,7 @@ export default function Landing({ onLogin, onRegister }) {
       {/* ── FOOTER ── */}
       <footer
         style={{
-          background: "#0a0f1e",
+          background: "#062b2f",
           borderTop: "1px solid rgba(255,255,255,.06)",
           padding: "36px 48px",
           display: "flex",
@@ -1017,14 +1003,14 @@ export default function Landing({ onLogin, onRegister }) {
       >
         <div
           style={{
-            fontFamily: "'Instrument Serif',serif",
+            fontFamily: "'Plus Jakarta Sans',sans-serif",
             fontSize: 20,
+            fontWeight: 600,
             color: "rgba(255,255,255,.6)",
-            fontStyle: "italic",
           }}
         >
-          Medi
-          <span style={{ color: "#60a5fa", fontStyle: "normal" }}>Setu</span>
+          Med
+          <span style={{ color: "#4fd6c7" }}>Friend</span>
         </div>
         <div style={{ fontSize: 13, color: "rgba(255,255,255,.3)" }}>
           © 2026 MedFriend. Made with ❤️ for India.

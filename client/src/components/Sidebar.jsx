@@ -25,7 +25,7 @@ export default function Sidebar({ page, setPage }) {
         <div className="logo-mark">
           <div className="logo-icon">{Icons.logo}</div>
           <span className="logo-text">
-            Medi<span>Setu</span>
+            Med<span>Friend</span>
           </span>
         </div>
       </div>

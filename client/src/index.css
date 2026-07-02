@@ -1,41 +1,51 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:           #f0f4f8;
+  --bg:           #f4fbfa;
   --surface:      #ffffff;
-  --surface2:     #f7fafc;
-  --border:       #e2e8f0;
-  --border2:      #cbd5e0;
-  --text:         #1a202c;
-  --text2:        #4a5568;
-  --text3:        #718096;
-  --accent:       #2b6cb0;
-  --accent-dark:  #2c5282;
-  --accent-light: #ebf4ff;
-  --accent-mid:   #bee3f8;
-  --teal:         #2c7a7b;
-  --teal-light:   #e6fffa;
-  --green:        #276749;
-  --green-bg:     #f0fff4;
-  --green-border: #9ae6b4;
-  --red:          #9b2c2c;
-  --red-bg:       #fff5f5;
-  --red-border:   #feb2b2;
-  --orange:       #7b341e;
-  --orange-bg:    #fffaf0;
-  --orange-border:#fbd38d;
-  --purple:       #553c9a;
-  --purple-bg:    #faf5ff;
-  --purple-border:#d6bcfa;
-  --pink:         #97266d;
-  --pink-bg:      #fff5f7;
-  --pink-border:  #fbb6ce;
+  --surface2:     #f8fdfc;
+  --border:       #d9ece8;
+  --border2:      #b8ddd6;
+  --text:         #12343b;
+  --text2:        #426268;
+  --text3:        #7a9398;
+
+  --accent:       #028191;
+  --accent-dark:  #016b79;
+  --accent-light: #e6f8f7;
+  --accent-mid:   #b9ebe5;
+
+  --teal:         #028191;
+  --teal-light:   #e6f8f7;
+
+  --green:        #01C29A;
+  --green-bg:     #e9fcf7;
+  --green-border: #8de7cf;
+
+  --red:          #d14343;
+  --red-bg:       #fff4f4;
+  --red-border:   #f3b3b3;
+
+  --orange:       #d97706;
+  --orange-bg:    #fff8eb;
+  --orange-border:#f5d08a;
+
+  --purple:       #7c3aed;
+  --purple-bg:    #f5f3ff;
+  --purple-border:#d8c7ff;
+
+  --pink:         #db2777;
+  --pink-bg:      #fff2f8;
+  --pink-border:  #f9bdd9;
+
   --radius:       12px;
   --radius-sm:    8px;
   --radius-xs:    6px;
-  --shadow:       0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md:    0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg:    0 10px 30px rgba(0,0,0,0.1);
+
+  --shadow:       0 2px 8px rgba(2,129,145,.08);
+  --shadow-md:    0 8px 24px rgba(2,129,145,.12);
+  --shadow-lg:    0 20px 40px rgba(2,129,145,.15);
+
   --font:         'Sora', sans-serif;
   --mono:         'JetBrains Mono', monospace;
   --nav-w:        240px;
@@ -68,7 +78,7 @@ body {
 .sidebar-logo { padding: 20px 20px 16px; border-bottom: 1px solid var(--border); }
 .logo-mark    { display: flex; align-items: center; gap: 10px; }
 .logo-icon    { width: 36px; height: 36px; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-.logo-icon svg { width: 20px; height: 20px; }
+.logo-icon svg { width: 20px; height: 20px; color: var(--accent-light);}
 .logo-text    { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; }
 .logo-text span { color: var(--accent); }
 
@@ -335,4 +345,61 @@ tbody tr:hover td { background: var(--surface2); }
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+/* ===== Brand Theme Overrides ===== */
+.btn-primary{
+  background:linear-gradient(135deg,#028191,#01C29A);
+  color:#fff;
+}
+.btn-primary:hover{
+  background:linear-gradient(135deg,#016b79,#00ae89);
+}
+
+.dash-topbar,
+.auth-left{
+  background:linear-gradient(135deg,#028191,#01C29A);
+}
+
+.logo-icon,
+.profile-avatar,
+.avatar,
+.chat-send{
+  background:#028191;
+}
+
+.nav-item.active{
+  background:#e6f8f7;
+  color:#028191;
+}
+
+.upload-area:hover,
+.upload-area.drag{
+  border-color:#01C29A;
+  background:#e9fcf7;
+}
+
+.form-input:focus{
+  border-color:#028191;
+  box-shadow:0 0 0 3px rgba(2,129,145,.15);
+}
+
+.spinner{
+  border-top-color:#028191;
+}
+
+.msg-assistant .msg-avatar{
+  background:#028191;
+}
+
+.msg-user .msg-avatar{
+  background:#01C29A;
+}
+
+.msg-user .msg-bubble{
+  background:#028191;
+}
+
+.chat-teaser:hover{
+  background:#d9f8f3;
 }

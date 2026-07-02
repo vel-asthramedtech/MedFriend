@@ -47,7 +47,7 @@ function TnCModal({ onClose, onAccept }) {
             <div
               style={{ fontSize: 17, fontWeight: 700, color: "var(--text)" }}
             >
-              Medi<span style={{ color: "var(--accent)" }}>Setu</span> — Terms &
+              Medi<span style={{ color: "var(--accent)" }}>Friend</span> — Terms &
               Conditions
             </div>
             <div style={{ fontSize: 12, color: "var(--text3)", marginTop: 2 }}>
@@ -221,7 +221,7 @@ function LogoBrand() {
         </svg>
       </div>
       <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: "-.5px" }}>
-        Medi<span style={{ color: "var(--accent)" }}>Setu</span>
+        Med<span style={{ color: "var(--accent)" }}>Friend</span>
       </div>
       <div style={{ fontSize: 12.5, color: "var(--text3)", marginTop: 3 }}>
         Your personal health companion
