@@ -18,7 +18,7 @@ Return ONLY valid JSON with this exact structure (no markdown, no explanation):
   "testResults": [
     { "testName": "test name", "value": "result value", "unit": "unit e.g. mg/dL", "normalRange": "normal range e.g. 70-100", "status": "normal|high|low|unknown" }
   ],
-  "advice": "Doctor's advice or lifestyle recommendations if mentioned",
+  "advice": "Doctor's advice or lifestyle recommendations if mentioned or else give your own advice based on the report",
   "followUpDate": "Follow-up date if mentioned or empty string"
 }
 
@@ -32,19 +32,22 @@ Rules:
 """
 
 def get_client():
-    api_key = os.getenv("GROK_API_KEY")
+    api_key = os.getenv("GROQ_API_KEY")
 
     if not api_key:
-        raise ValueError("GROK_API_KEY is missing")
+        raise ValueError("GROQ_API_KEY is missing")
 
     return OpenAI(
         api_key=api_key,
-        base_url=os.getenv("GROK_BASE_URL", "https://api.x.ai/v1"),
+        base_url=os.getenv(
+            "GROQ_BASE_URL",
+            "https://api.groq.com/openai/v1"
+        ),
     )
 
 
 def analyze_report(raw_text: str) -> dict:
-    """Send OCR text to Grok for structured extraction."""
+    """Send OCR text to Groq for structured extraction."""
     try:
         client = get_client() 
 
@@ -52,21 +55,20 @@ def analyze_report(raw_text: str) -> dict:
         text = raw_text[:8000] if len(raw_text) > 8000 else raw_text
 
         response = client.chat.completions.create(
-            model=os.getenv("GROK_MODEL", "grok-2-latest"),
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": f"Extract data from this medical report:\n\n{text}"}
-            ],
-            max_tokens=2000,
-            temperature=0.1,
-        )
+    model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
+    messages=[
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {
+            "role": "user",
+            "content": f"Extract data from this medical report:\n\n{text}"
+        }
+    ],
+    response_format={"type": "json_object"},
+    temperature=0.1,
+    max_tokens=2000,
+)
 
-        content = response.choices[0].message.content.strip()
-
-        content = re.sub(r"^```json\s*", "", content)
-        content = re.sub(r"```$", "", content)
-        content = content.strip()
-
+        content = response.choices[0].message.content
         result = json.loads(content)
 
         defaults = {
@@ -92,7 +94,7 @@ def analyze_report(raw_text: str) -> dict:
         return _fallback_result()
 
     except Exception as e:
-        print(f"Grok analysis error: {e}")
+        print(f"Groq analysis error: {e}")
         return _fallback_result()
 
 
