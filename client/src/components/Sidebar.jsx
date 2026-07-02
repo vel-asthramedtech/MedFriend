@@ -8,7 +8,6 @@ const NAV = [
   { key: "chat", label: "AI Health Chat", icon: "chat" },
   { key: "reminders", label: "Medicine Reminders", icon: "reminder" },
   { key: "scanner", label: "Scan & Understand", icon: "scanner" },
-  { key: "schemes", label: "Govt Schemes", icon: "schemes" },
   { key: "profile", label: "My Profile", icon: "profile" },
 ];
 

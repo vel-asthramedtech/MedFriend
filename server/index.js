@@ -27,7 +27,6 @@ app.use("/api/auth", authLimiter, require("./routes/auth"));
 app.use("/api/reports", require("./routes/reports"));
 app.use("/api/chat", require("./routes/chat"));
 app.use("/api/reminders", require("./routes/reminders"));
-app.use("/api/schemes", require("./routes/schemes"));
 app.use("/api/scanner", require("./routes/scanner"));
 
 app.get("/api/health", (req, res) =>

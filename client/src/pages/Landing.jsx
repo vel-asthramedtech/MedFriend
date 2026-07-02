@@ -80,7 +80,7 @@ const TESTIMONIALS = [
     initials: "PD",
   },
   {
-    text: '"Mujhe pata hi nahi tha ki Ayushman Bharat ke liye eligible hun. MedFriend ke schemes section se pata chala. Ab free mein treatment mil raha hai!"',
+    text: '"Mujhe pata hi nahi tha ki Ayushman Bharat ke liye eligible hun. MedFriend se pata chala. Ab free mein treatment mil raha hai!"',
     name: "Ramesh Meena",
     loc: "Jaipur, Rajasthan",
     initials: "RM",
@@ -387,8 +387,7 @@ export default function Landing({ onLogin, onRegister }) {
           >
             Upload reports. Chat in{" "}
             <strong style={{ color: "#0a0f1e" }}>Hindi or English</strong>. Get
-            medicine reminders. Discover government schemes. All in one place —
-            for every Indian.
+            medicine reminders. All in one place — for every Indian.
           </p>
 
           <div

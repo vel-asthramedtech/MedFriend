@@ -10,7 +10,7 @@ function TnCModal({ onClose, onAccept }) {
   const sections = [
     {
       title: "1. About MedFriend",
-      body: "MedFriend is an AI-powered unified health surveillance ecosystem that enables users to digitize medical records, receive AI-driven health analysis, discover government health schemes, and set medicine reminders.",
+      body: "MedFriend is an AI-powered unified health surveillance ecosystem that enables users to digitize medical records, receive AI-driven health analysis and set medicine reminders.",
     },
     {
       title: "2. Eligibility",
@@ -25,19 +25,15 @@ function TnCModal({ onClose, onAccept }) {
       body: "Your personal health data is stored in encrypted cloud storage. By using MedFriend, you consent to the anonymization and aggregation of your health data for population-level insights, which may be shared with government agencies, R&D institutions, and pharmaceutical companies. No personally identifiable information (PII) will be shared.",
     },
     {
-      title: "5. Insurance & Government Schemes",
-      body: "Scheme eligibility information is retrieved from public government data sources. Final eligibility determination lies solely with the respective government authority. This does not constitute financial advice.",
-    },
-    {
-      title: "6. Prohibited Conduct",
+      title: "5. Prohibited Conduct",
       body: "You must not upload false or fraudulent medical records, attempt to reverse-engineer the platform, impersonate others, or engage in any activity that violates applicable law.",
     },
     {
-      title: "7. Limitation of Liability",
+      title: "6. Limitation of Liability",
       body: "MedFriend Technologies Pvt. Ltd. shall not be liable for medical decisions made based on AI-generated analysis, data loss due to force majeure, or any indirect/consequential damages arising from platform use.",
     },
     {
-      title: "8. Governing Law",
+      title: "7. Governing Law",
       body: "These Terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of competent courts in New Delhi, India.",
     },
   ];
@@ -241,7 +237,6 @@ function AuthHero() {
   const features = [
     "AI report analysis in your language",
     "Medicine reminders via email",
-    "Government health schemes",
     "Secure cloud storage",
   ];
 
@@ -270,7 +265,7 @@ function AuthHero() {
           }}
         >
           Upload medical reports, get AI-powered analysis in Hindi or English,
-          set medicine reminders, and discover government health schemes — all
+          set medicine reminders — all
           in one place.
         </div>
         {features.map((f, i) => (

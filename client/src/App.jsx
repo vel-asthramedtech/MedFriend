@@ -6,7 +6,6 @@ import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
 import Chat from "./pages/Chat";
 import Reminders from "./pages/Reminders";
-import Schemes from "./pages/Schemes";
 import Profile from "./pages/Profile";
 import { LoadingCenter } from "./components/UI";
 import Scanner from "./pages/Scanner";
@@ -86,7 +85,6 @@ function AppInner() {
         {page === "reports" && <Reports />}
         {page === "chat" && <Chat />}
         {page === "reminders" && <Reminders />}
-        {page === "schemes" && <Schemes />}
         {page === "profile" && <Profile />}
         {page === "scanner" && <Scanner />}
       </div>

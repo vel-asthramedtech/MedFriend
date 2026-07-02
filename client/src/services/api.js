@@ -57,8 +57,5 @@ export const remindersAPI = {
   delete: (id) => api.delete(`/reminders/${id}`),
 };
 
-export const schemesAPI = {
-  getAll: (params) => api.get("/schemes", { params }),
-};
 
 export default api;

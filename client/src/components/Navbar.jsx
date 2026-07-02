@@ -9,7 +9,6 @@ const NAV = [
   { key: "chat", label: "AI Chat", icon: "chat" },
   { key: "reminders", label: "Reminders", icon: "reminder" },
   { key: "scanner", label: "Scanner", icon: "scanner" },
-  { key: "schemes", label: "Schemes", icon: "schemes" },
 ];
 
 export default function Navbar({ page, setPage }) {
