@@ -9,7 +9,7 @@ import os
 import json
 
 print("=" * 60)
-print("  MediSetu — ML Model Training")
+print("  MediFriend — ML Model Training")
 print("  Random Forest Classifier for Medical Test Results")
 print("=" * 60)
 

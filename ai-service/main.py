@@ -11,7 +11,7 @@ from analyzer import analyze_report
 
 load_dotenv()
 
-app = FastAPI(title="MediSetu AI Service", version="1.0.0")
+app = FastAPI(title="MedFriend AI Service", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
