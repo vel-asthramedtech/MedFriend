@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const OpenAI = require("openai");
+const Groq = require("groq-sdk");
 const fs = require("fs");
 const path = require("path");
 const { protect } = require("../middleware/auth");
@@ -9,11 +9,11 @@ const { protect } = require("../middleware/auth");
 const upload = multer({ dest: "uploads/scanner/" });
 
 let _client = null;
+
 function getClient() {
   if (!_client) {
-    _client = new OpenAI({
-      apiKey: process.env.GROK_API_KEY,
-      baseURL: "https://api.groq.com/openai/v1",
+    _client = new Groq({
+      apiKey: process.env.GROQ_API_KEY,
     });
   }
   return _client;
@@ -22,8 +22,8 @@ function getClient() {
 // ── Language name map for prompt injection ──────────────────────────
 const LANGUAGE_NAMES = {
   en: "English",
-  hi: "Hindi (हिंदी)",
   ta: "Tamil (தமிழ்)",
+  hi: "Hindi (हिंदी)",
   bn: "Bengali (বাংলা)",
   te: "Telugu (తెలుగు)",
   mr: "Marathi (मराठी)",
@@ -96,6 +96,7 @@ function buildPrompt(category, languageCode) {
 
 // ── Route ────────────────────────────────────────────────────────────
 router.post("/analyse", protect, upload.single("file"), async (req, res) => {
+  console.log("==== /analyse HIT ====");
   try {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
@@ -110,21 +111,28 @@ router.post("/analyse", protect, upload.single("file"), async (req, res) => {
     const mimeType = req.file.mimetype || "image/jpeg";
 
     const completion = await getClient().chat.completions.create({
-      model: "meta-llama/llama-4-scout-17b-16e-instruct",
+      model:
+        process.env.GROQ_VISION_MODEL ||
+        "meta-llama/llama-4-scout-17b-16e-instruct",
       messages: [
         {
           role: "user",
           content: [
-            { type: "text", text: prompt },
+            {
+              type: "text",
+              text: prompt,
+            },
             {
               type: "image_url",
-              image_url: { url: `data:${mimeType};base64,${base64Image}` },
+              image_url: {
+                url: `data:${mimeType};base64,${base64Image}`,
+              },
             },
           ],
         },
       ],
-      max_tokens: 1000,
       temperature: 0.1,
+      max_tokens: 1000,
     });
 
     let content = completion.choices[0].message.content.trim();
@@ -144,10 +152,17 @@ router.post("/analyse", protect, upload.single("file"), async (req, res) => {
 
     res.json(result);
   } catch (err) {
-    console.error("Scanner error:", err.message);
-    if (req.file?.path && fs.existsSync(req.file.path))
+    console.error("========== SCANNER ERROR ==========");
+    console.dir(err, { depth: null });
+
+    if (req.file?.path && fs.existsSync(req.file.path)) {
       fs.unlinkSync(req.file.path);
-    res.status(500).json({ error: "Analysis failed. Please try again." });
+    }
+
+    res.status(500).json({
+      error: err.message,
+      details: err.error || err,
+    });
   }
 });
 
