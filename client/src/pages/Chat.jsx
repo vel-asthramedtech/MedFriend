@@ -5,11 +5,11 @@ import { useAuth } from "../context/AuthContext";
 import { Spinner } from "../components/UI";
 
 const QUICK = [
-  "What does my latest report mean?",
-  "Metformin ke side effects kya hain?",
-  "Iron badhane ke liye kya khayein?",
-  "When is my next follow-up?",
-  "Blood sugar normal kaise karein?",
+  "En latest report-na enna meaning?",
+  "Metformin side effects enna?",
+  "Iron adhigama vara enna saapidanum?",
+  "En next follow-up eppo?",
+  "Blood sugar normal-a veikka enna seiyanum?",
 ];
 
 function formatTime(ts) {
@@ -19,7 +19,7 @@ function formatTime(ts) {
   });
 }
 
-function speak(text, lang = "hi-IN") {
+function speak(text, lang = "ta-IN") {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(text);
@@ -65,7 +65,15 @@ export default function Chat() {
           setMessages([
             {
               role: "assistant",
-              content: `Namaste ${user?.name?.split(" ")[0]}! 🙏 I am MediBot, your AI health assistant.\n\nMujhse apni sehat ke baare mein poochein — Hindi ya English mein. I can explain your medical reports, medicines, and give health advice based on your records.\n\nHow can I help you today?`,
+              content: `Vanakkam ${user?.name?.split(" ")[0]}! 🙏
+
+Naan MedBot, unga AI Health Assistant.
+
+Ungaloda health, medical reports, medicines pathi edhu venaalum kekkalam. Tamil-um English-um mix pannitu pesalaam.
+
+Ungal reports-a easy-a explain pannuren, medicines pathi solluren, health guidance kuduppen.
+
+Indru ungalukku naan ena help pannanum?`,
               timestamp: new Date().toISOString(),
             },
           ]);
@@ -78,7 +86,7 @@ export default function Chat() {
           {
             role: "assistant",
             content:
-              "Namaste! I am MediBot. How can I help you with your health today?",
+              "Namaste! I am MedBot. How can I help you with your health today?",
             timestamp: new Date().toISOString(),
           },
         ]);
@@ -98,7 +106,7 @@ export default function Chat() {
 
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) {
-      alert("Aapka browser mic support nahi karta. Chrome ya Edge use karein.");
+      alert("Unga browser microphone support pannala. Chrome illa Edge use pannunga.");
       return;
     }
 
@@ -107,16 +115,16 @@ export default function Chat() {
     const rec = new SR();
     rec.continuous = false;
     rec.interimResults = false;
-    rec.lang = user?.preferredLanguage === "en" ? "en-IN" : "hi-IN";
+    rec.lang = user?.preferredLanguage === "en" ? "en-IN" : "ta-IN";
 
     rec.onstart = () => {
-      console.log("[MediBot Mic] Started, lang:", rec.lang);
+      console.log("[MedBot Mic] Started, lang:", rec.lang);
     };
 
     rec.onresult = (e) => {
-      console.log("[MediBot Mic] Result received:", e.results);
+      console.log("[MedBot Mic] Result received:", e.results);
       const transcript = e.results[0]?.[0]?.transcript?.trim();
-      console.log("[MediBot Mic] Transcript:", transcript);
+      console.log("[MedBot Mic] Transcript:", transcript);
       if (transcript) {
         setInput(transcript);
       }
@@ -125,27 +133,27 @@ export default function Chat() {
     };
 
     rec.onspeechend = () => {
-      console.log("[MediBot Mic] Speech ended, stopping...");
+      console.log("[MedBot Mic] Speech ended, stopping...");
       rec.stop();
     };
 
     rec.onerror = (e) => {
-      console.error("[MediBot Mic] Error:", e.error);
+      console.error("[MedBot Mic] Error:", e.error);
       if (e.error === "not-allowed") {
         alert(
-          "Mic permission deny hai. Browser address bar mein lock icon click karke mic allow karein.",
+          "Microphone permission kudukkala. Browser address bar-la irukkura lock icon click panni microphone allow pannunga.",
         );
       } else if (e.error === "no-speech") {
-        alert("Koi awaaz nahi aayi. Thoda aur kareeb bolke try karein.");
+        alert("Voice detect aagala. Konjam clear-a pesi marubadiyum try pannunga.");
       } else {
-        alert("Mic error aaya: " + e.error);
+        alert("Microphone error: " + e.error);
       }
       listeningRef.current = false;
       setListening(false);
     };
 
     rec.onend = () => {
-      console.log("[MediBot Mic] Ended");
+      console.log("[MedBot Mic] Ended");
       listeningRef.current = false;
       setListening(false);
     };
@@ -188,7 +196,7 @@ export default function Chat() {
       ]);
 
       if (ttsEnabled) {
-        const lang = user?.preferredLanguage === "en" ? "en-IN" : "hi-IN";
+        const lang = user?.preferredLanguage === "en" ? "en-IN" : "ta-IN";
         speak(reply, lang);
       }
     } catch {
@@ -215,7 +223,7 @@ export default function Chat() {
     stopSpeaking();
     try {
       await chatAPI.clearSession(sessionId);
-    } catch {}
+    } catch { }
     localStorage.removeItem("chatSessionId");
     window.location.reload();
   };
@@ -245,14 +253,14 @@ export default function Chat() {
             flexShrink: 0,
           }}
         />
-        <span style={{ fontWeight: 600, fontSize: 13 }}>MediBot</span>
+        <span style={{ fontWeight: 600, fontSize: 13 }}>MedBot</span>
         <span style={{ fontSize: 12, color: "var(--text3)" }}>
-          Powered by LLaMA AI · Hindi & English
+          Powered by LLaMA AI · Tamil & English
         </span>
 
         <button
           className="btn btn-ghost btn-sm"
-          title={ttsEnabled ? "Mute MediBot voice" : "Unmute MediBot voice"}
+          title={ttsEnabled ? "Mute MedBot voice" : "Unmute MedBot voice"}
           onClick={() => {
             setTtsEnabled((v) => !v);
             if (ttsEnabled) stopSpeaking();
@@ -362,8 +370,8 @@ export default function Chat() {
           className="chat-input"
           placeholder={
             listening
-              ? "Listening... bol rahe hain..."
-              : "Apna sawaal yahan likhein (Hindi or English)..."
+              ? "Kekkiren... pesunga..."
+              : "Unga kelvi inga type pannunga (Tamil or English)..."
           }
           value={input}
           onChange={(e) => setInput(e.target.value)}

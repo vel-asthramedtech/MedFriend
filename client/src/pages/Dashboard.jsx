@@ -142,7 +142,7 @@ export default function Dashboard({ setPage }) {
       <div className="chat-teaser mb-16" onClick={() => setPage('chat')}>
         <div className="chat-teaser-dot" />
         <div className="chat-teaser-text">
-          Ask MediBot anything — "What does my report mean?" or "Metformin ke side effects kya hain?"
+          Ask MedBot anything — "What does my report mean?" or "Metformin ke side effects kya hain?"
         </div>
         <span style={{ marginLeft: 'auto', fontSize: 13, color: 'var(--accent)', fontWeight: 600 }}>Chat →</span>
       </div>

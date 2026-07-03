@@ -19,7 +19,7 @@ const PAGE_META = {
   },
   chat: {
     title: "AI Health Chat",
-    subtitle: "Ask MediBot in Hindi or English",
+    subtitle: "Ask MedBot in Tamil or English",
   },
   reminders: {
     title: "Medicine Reminders",

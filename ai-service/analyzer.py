@@ -7,7 +7,7 @@ SYSTEM_PROMPT = """You are a medical report analysis AI. Given raw OCR text from
 
 Return ONLY valid JSON with this exact structure (no markdown, no explanation):
 {
-  "summary": "2-3 sentence plain language summary of the report",
+  "summary": "3-4 sentence plain language summary of the report",
   "doctorName": "Dr. Name or empty string",
   "hospitalName": "Hospital name or empty string",
   "reportDate": "Date as string or empty string",

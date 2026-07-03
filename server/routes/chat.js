@@ -1,32 +1,28 @@
 const express = require("express");
 const router = express.Router();
-const OpenAI = require("openai");
+const Groq = require("groq-sdk");
 const { v4: uuidv4 } = require("uuid");
 const { protect } = require("../middleware/auth");
 const ChatSession = require("../models/ChatSession");
 const MedicalReport = require("../models/MedicalReport");
 
-let _grok = null;
-function getGrok() {
-  if (!_grok) {
-    _grok = new OpenAI({
-      apiKey: process.env.GROK_API_KEY,
-      baseURL: process.env.GROK_BASE_URL || "https://api.x.ai/v1",
-    });
-  }
-  return _grok;
-}
 
-const SYSTEM_PROMPT = `You are MediBot, a medical AI assistant for MedFriend, an Indian health app.
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+});
+
+
+const SYSTEM_PROMPT = `You are MedBot, a medical AI assistant for MedFriend, an Indian health app.
 
 LANGUAGE DETECTION — THIS IS YOUR MOST IMPORTANT RULE:
 - Look at the user's CURRENT message carefully
 - If it contains English words and English sentence structure → respond in ENGLISH ONLY
-- If it contains Hindi Devanagari script (क, ख, ग, etc.) → respond in HINDI ONLY  
-- If it contains Roman script Hindi words (kya, hai, mera, tera, aapka, kaise) → respond in HINGLISH ONLY
-- NEVER respond in Hindi if the user wrote in English
-- NEVER respond in English if the user wrote in Hindi
+- If it contains Tamil script (அ, ஆ, இ, ஈ, உ, எ, க, ச, த, ப, ம, etc.) → respond in TAMIL ONLY
+- If it contains Roman Tamil words (enna, epdi, eppadi, iruku, illa, sapten, vali, udambu, marundhu, romba, seri, venum, mudiyala, pa, da, ma, etc.) → respond in TANGLISH ONLY
+- NEVER respond in Tamil if the user wrote in English
+- NEVER respond in English if the user wrote in Tamil or Tanglish
 - Match the user's language EXACTLY every single time
+- If the user's message mixes English and Tanglish, reply in the same mixed style
 
 You help users with:
 - Understanding medical reports and test results
@@ -34,16 +30,25 @@ You help users with:
 - General health advice
 - Symptoms and when to see a doctor
 
-- Remember only reply on medical data nothing else
-
-- Reply in points
-Other rules:
-- Never prescribe new medicines
-- Be warm and friendly
-- Use Indian context for diet advice (dal, roti, sabzi)
-- Keep responses concise
-Only focus on major points
+Remember:
+- Reply ONLY to medical and health-related questions.
+- If the user asks about non-medical topics, politely state that you can only assist with medical and health-related queries.
+- Reply in clear bullet points.
+- Focus only on the major points.
+- Never prescribe new medicines.
+- Encourage consulting a qualified doctor for diagnosis or treatment decisions.
+- Be warm, friendly, and supportive.
+- Use Indian context for diet advice (idli, dosa, rice, sambar, rasam, dal, chapati, vegetables, fruits, etc.).
+- Keep responses concise and easy to understand.
 `;
+
+function ensureArray(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string") return [value];
+  if (typeof value === "object") return Object.values(value).flat();
+  return [];
+}
 
 router.get("/session/:sessionId", protect, async (req, res) => {
   try {
@@ -102,12 +107,11 @@ router.post("/message", protect, async (req, res) => {
           .sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt))[0];
 
         if (latest && latest.extractedData) {
-          const diagnosis = latest.extractedData.diagnosis || [];
+          const diagnosis = ensureArray(latest.extractedData.diagnosis);
           const testResults = latest.extractedData.testResults || [];
           const medicines = latest.extractedData.medicines || [];
 
           reportContext = `
-
 User's latest report context:
 Report: ${latest.reportName || "N/A"}
 Diagnosis: ${diagnosis.join(", ") || "N/A"}
@@ -124,24 +128,21 @@ Medicines: ${medicines.map((m) => `${m.name} ${m.dosage}`).join(", ") || "N/A"}
       console.error("Report context error:", e.message);
     }
 
-    const grokMessages = [
+    const groqMessages = [
       { role: "system", content: SYSTEM_PROMPT + reportContext },
       ...historyMessages,
       { role: "user", content: message },
     ];
 
-    const grok = getGrok();
-
-    const completion = await grok.chat.completions.create({
-      model: process.env.GROK_MODEL || "grok-2-latest",
-      messages: grokMessages,
+    const completion = await groq.chat.completions.create({
+      model: process.env.GROQ_MODEL,
+      messages: groqMessages,
       max_tokens: 800,
+      top_p: 0.9,
       temperature: 0.7,
     });
 
-    const reply =
-      completion?.choices?.[0]?.message?.content ||
-      "Sorry, I couldn't generate a response.";
+    const reply = completion?.choices?.[0]?.message?.content;
 
     session.messages.push({
       role: "user",
