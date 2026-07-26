@@ -30,7 +30,7 @@ npm run dev
 ```bash
 cd ai-service
 pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
+python main.py
 ```
 
 ### 5. Start frontend
