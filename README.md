@@ -5,7 +5,7 @@
 medfriend-full/
 ├── client/          → React.js frontend
 ├── server/          → Node.js + Express backend
-├── ai-service/      → Python FastAPI (OCR + Grok AI)
+├── ai-service/      → Python FastAPI (OCR + Groq AI)
 └── README.md
 ```
 
@@ -43,7 +43,7 @@ npm run dev
 Open http://localhost:5173
 
 ## API Keys needed
-- **GROK_API_KEY** → https://console.x.ai (xAI Grok)
+- **GROK_API_KEY** → https://console.groq.com/ (Groq AI)
 - **GMAIL_USER + GMAIL_APP_PASSWORD** → Google Account → Security → App Passwords
 - **MONGODB_URI** → MongoDB Atlas or local mongodb://localhost:27017/medfriend
 - **JWT_SECRET** → any long random string (e.g. run: node -e "console.log(require('crypto').randomBytes(64).toString('hex'))")

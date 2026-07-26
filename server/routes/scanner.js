@@ -94,6 +94,15 @@ function buildPrompt(category, languageCode) {
   return template.replace(/\{LANGUAGE\}/g, languageName);
 }
 
+// ── Strip <think>...</think> reasoning blocks some Groq models emit ──
+function stripThinking(text) {
+  // Handles a closed think block
+  let cleaned = text.replace(/<think>[\s\S]*?<\/think>/gi, "");
+  // Handles a think block that never closed because generation was cut off
+  cleaned = cleaned.replace(/<think>[\s\S]*$/gi, "");
+  return cleaned.trim();
+}
+
 // ── Route ────────────────────────────────────────────────────────────
 router.post("/analyse", protect, upload.single("file"), async (req, res) => {
   console.log("==== /analyse HIT ====");
@@ -113,7 +122,7 @@ router.post("/analyse", protect, upload.single("file"), async (req, res) => {
     const completion = await getClient().chat.completions.create({
       model:
         process.env.GROQ_VISION_MODEL ||
-        "meta-llama/llama-4-scout-17b-16e-instruct",
+        "qwen/qwen3.6-27b",
       messages: [
         {
           role: "user",
@@ -132,10 +141,30 @@ router.post("/analyse", protect, upload.single("file"), async (req, res) => {
         },
       ],
       temperature: 0.1,
-      max_tokens: 1000,
+      // Groq's own param name for this; also give the model enough
+      // headroom to finish its internal reasoning AND write the JSON.
+      max_completion_tokens: 4096,
+      // Ask Groq to enforce valid JSON output directly.
+      response_format: { type: "json_object" },
     });
 
-    let content = completion.choices[0].message.content.trim();
+    let content = completion.choices[0].message.content?.trim() || "";
+    const finishReason = completion.choices[0].finish_reason;
+
+    console.log("RAW MODEL OUTPUT:", content);
+    console.log("FINISH REASON:", finishReason);
+
+    if (finishReason === "length") {
+      // Model ran out of tokens before finishing — treat as a hard error
+      // rather than trying to parse a truncated fragment.
+      throw new Error(
+        "Model response was truncated (finish_reason=length). Try increasing max_completion_tokens."
+      );
+    }
+
+    // Some reasoning models still leak <think> blocks into content
+    // even with response_format set — strip them defensively.
+    content = stripThinking(content);
 
     // Strip markdown code fences if any
     content = content.replace(/```json\s*/gi, "");
