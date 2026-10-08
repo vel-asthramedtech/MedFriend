@@ -1,11 +1,11 @@
-# MediSetu — Full Stack Medical App
+# MedFriend — Full Stack Medical App
 
 ## Project Structure
 ```
-medisetu-full/
+medfriend-full/
 ├── client/          → React.js frontend
 ├── server/          → Node.js + Express backend
-├── ai-service/      → Python FastAPI (OCR + Grok AI)
+├── ai-service/      → Python FastAPI (OCR + Groq AI)
 └── README.md
 ```
 
@@ -30,7 +30,7 @@ npm run dev
 ```bash
 cd ai-service
 pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
+python main.py
 ```
 
 ### 5. Start frontend
@@ -43,8 +43,8 @@ npm run dev
 Open http://localhost:5173
 
 ## API Keys needed
-- **GROK_API_KEY** → https://console.x.ai (xAI Grok)
+- **GROK_API_KEY** → https://console.groq.com/ (Groq AI)
 - **GMAIL_USER + GMAIL_APP_PASSWORD** → Google Account → Security → App Passwords
-- **MONGODB_URI** → MongoDB Atlas or local mongodb://localhost:27017/medisetu
+- **MONGODB_URI** → MongoDB Atlas or local mongodb://localhost:27017/medfriend
 - **JWT_SECRET** → any long random string (e.g. run: node -e "console.log(require('crypto').randomBytes(64).toString('hex'))")
 - **Cloudinary** → https://cloudinary.com (free tier, currently commented out)
